@@ -1,29 +1,29 @@
 #!/bin/bash
 
-###########################################################################################
-# How to use this script :                                                                #
-#   ./consul_server.sh consul_version os_type os license encryption_key consul_acl_token  #
-#                                                                                         #
-# consul_version :                                                                        #
-#   - OSS : 1.4.3                                                                         #
-#   - Ent: 1.4.3+ent (Default)                                                            #
-# os_type :                                                                               #
-#   - linux_386 or linux_amd64 (Default)                                                  #
-#   - linux_arm or linux_arm64                                                            #
-#   - freebsd_386 or freebsd_amd64                                                        #
-#   - darwin_386 or darwin_amd64                                                          #
-#   - solaris_amd64                                                                       #
-# os :                                                                                    #
-#   - redhat                                                                              #
-#   - centos                                                                              #
-#   - ubuntu (Default)                                                                    #
-#   - solaris                                                                             #
-#   - freebsd                                                                             #
-#   - macosx                                                                              #
-# license : Enter the license number that Hashicorp provides                              #
-# encryption_key : The key must be 16-Bits, base64 encoded.                               #                                          
-# consul_acl_token : Like Encryption Key, must be 16-Bits, base64 encoded.                #
-###########################################################################################
+##################################################################################################
+# How to use this script :                                                                       #
+#   ./consul_single_server.sh consul_version os_type os license encryption_key consul_acl_token  #
+#                                                                                                #
+# consul_version :                                                                               #
+#   - OSS : 1.4.3                                                                                #
+#   - Ent: 1.4.3+ent (Default)                                                                   #
+# os_type :                                                                                      #
+#   - linux_386 or linux_amd64 (Default)                                                         #
+#   - linux_arm or linux_arm64                                                                   #
+#   - freebsd_386 or freebsd_amd64                                                               #
+#   - darwin_386 or darwin_amd64                                                                 #
+#   - solaris_amd64                                                                              #
+# os :                                                                                           #
+#   - redhat                                                                                     #
+#   - centos                                                                                     #
+#   - ubuntu (Default)                                                                           #
+#   - solaris                                                                                    #
+#   - freebsd                                                                                    #
+#   - macosx                                                                                     #
+# license : Enter the license number that Hashicorp provides                                     #
+# encryption_key : The key must be 16-Bits, base64 encoded.                                      #                                          
+# consul_acl_token : Like Encryption Key, must be 16-Bits, base64 encoded.                       #
+##################################################################################################
 
 # Variables
 
@@ -36,7 +36,7 @@ node_name=$(hostnamectl --static)
 license=${4}
 encryption_key=${5}
 consul_acl_token=${6}
-bootstrap=3
+bootstrap=1
 
 # Prepare the environment and download Consul
 
@@ -124,7 +124,7 @@ sudo tee /etc/consul/config.json > /dev/null <<EOF
     "ports": {
         "http": 8500
     },
-    "retry_join": ["192.168.94.139","192.168.94.138","192.168.94.137"],
+    "retry_join": ["${ip_address}"],
     "server": true,
     "ui": true,
     "acl": {

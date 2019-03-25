@@ -20,7 +20,7 @@
 #   - solaris                                                                             #
 #   - freebsd                                                                             #
 #   - macosx                                                                              #
-# license : Enterthe license number that Hashicorp provides                               #
+# license : Enter the license number that Hashicorp provides                              #
 # encryption_key : The key must be 16-Bits, base64 encoded.                               #                                          
 # consul_acl_token : Like Encryption Key, must be 16-Bits, base64 encoded.                #
 ###########################################################################################
