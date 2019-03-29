@@ -44,7 +44,13 @@ license=${6}
 echo "# Ensure all pre requisites are met"
 echo "-----------------------------------"
 
-sudo apt-get install -y jq unzip  
+if [ ${os} == redhat ]
+then 
+sudo yum install -y jq unzip net-tools
+else 
+sudo apt-get install -y jq unzip net-tools 
+fi
+
 
 echo "# Downloading Vault Binaries from Hashicorp Repository"
 echo "-------------------------------------------------------------"
@@ -100,8 +106,7 @@ sudo chown -R vault:vault /var/run/vault
 sudo mkdir -p /var/vault
 sudo chown -R vault:vault /var/vault
 
-echo "# Create Vault Server Configuration File"
-echo "----------------------------------"
+
 
 echo "# Give Vault the ability to use mlock syscall"
 echo "---------------------------------------------"
@@ -109,7 +114,16 @@ echo "---------------------------------------------"
 sudo setcap cap_ipc_lock=+ep $(readlink -f $(which vault))
 
 # Retrieve IP Address on Default Nic on the Host
+
+iif [ ${os} == redhat ]
+then
+ip_address=$(ifconfig ${nic} | awk '/inet /{print substr($2, 1)}')
+else
 ip_address=$(ifconfig ${nic} | awk '/inet addr/{print substr($2, 6)}')
+fi
+
+echo "# Create Vault Server Configuration File"
+echo "----------------------------------"
 
 # Generate VaultConfiguration file
 if [ ${vault_backend} == "consul" ]

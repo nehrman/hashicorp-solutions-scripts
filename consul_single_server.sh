@@ -87,9 +87,6 @@ sudo chown -R consul:consul /var/consul
 echo "# Create Consul Server Configuration File"
 echo "----------------------------------"
 
-# Generate Consul Gossip Encryption Key
-# consul_gossip_token=$(consul keygen)
-
 # Retrieve IP Address on Default Nic on the Host
 ip_address=$(ifconfig ${nic} | awk '/inet addr/{print substr($2, 6)}')
 

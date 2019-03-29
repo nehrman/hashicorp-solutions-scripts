@@ -99,7 +99,7 @@ sudo tee /etc/consul/config.json > /dev/null <<EOF
         "http": "0.0.0.0", 
         "dns": "0.0.0.0"
     },
-    "advertise_addr": "${ip_address}",
+    "advertise_addr": "",
     "bind_addr": "0.0.0.0",
     "connect": {
         "enabled": true
