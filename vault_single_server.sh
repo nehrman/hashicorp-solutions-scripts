@@ -106,8 +106,6 @@ sudo chown -R vault:vault /var/run/vault
 sudo mkdir -p /var/vault
 sudo chown -R vault:vault /var/vault
 
-
-
 echo "# Give Vault the ability to use mlock syscall"
 echo "---------------------------------------------"
 
@@ -163,10 +161,14 @@ ui = true
 EOF
 fi
 
+# Register where Vault is deployed 
+vault_path=$(which vault)
+
 # Generate Vault Service configuration file
 echo "# Create Vault Service Configuration with systemd"
 echo "--------------------------------------------------"
 
+if []
 sudo tee /etc/systemd/system/vault.service > /dev/null <<EOF
 [Unit]
 Description="HashiCorp Vault - A Centralized Secrets Management Solution"
@@ -179,7 +181,7 @@ User=vault
 Group=vault
 PIDFile=/var/run/vault/vault.pid
 PermissionsStartOnly=true
-ExecStart=/usr/local/bin/vault server -config=/etc/vault.d/config.hcl
+ExecStart=${vault_path} server -config=/etc/vault.d/config.hcl
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM
