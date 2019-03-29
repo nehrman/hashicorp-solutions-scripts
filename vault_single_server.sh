@@ -115,7 +115,7 @@ sudo setcap cap_ipc_lock=+ep $(readlink -f $(which vault))
 
 # Retrieve IP Address on Default Nic on the Host
 
-iif [ ${os} == redhat ]
+if [ ${os} == redhat ]
 then
 ip_address=$(ifconfig ${nic} | awk '/inet /{print substr($2, 1)}')
 else
