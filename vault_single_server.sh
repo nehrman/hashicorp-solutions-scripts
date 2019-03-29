@@ -168,7 +168,6 @@ vault_path=$(which vault)
 echo "# Create Vault Service Configuration with systemd"
 echo "--------------------------------------------------"
 
-if []
 sudo tee /etc/systemd/system/vault.service > /dev/null <<EOF
 [Unit]
 Description="HashiCorp Vault - A Centralized Secrets Management Solution"
