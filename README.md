@@ -31,55 +31,84 @@ No specific pre requisites for this a part to able to use a terminal and to know
 - Clone the repo on your laptop :
 
 ```
-$ git clone https://github.com/nehrman/terraform-vault-az-demo
+$ git clone https://github.com/nehrman/hashicorp-solutions-scripts
 ```
 
-- Copy and rename **terraform.tfvars.example** :
+
+## For Vault 
+
+- Look at the variables :
 
 ```
-$ cp terraform.tfvars.example terraform.tfvars
+##################################################################################################
+# How to use this script :                                                                       #
+#   ./vault_single_server.sh vault_version vault _enterprise os_type os vault_backend license    #
+#                                                                                                #
+# Vault_version :                                                                                #
+#   - OSS : 1.1.1                                                                                #
+#   - Ent: 1.1.1+ent (Default)                                                                   #
+# os_type :                                                                                      #
+#   - linux_386 or linux_amd64 (Default)                                                         #
+#   - linux_arm or linux_arm64                                                                   #
+#   - freebsd_386 or freebsd_amd64                                                               #
+#   - darwin_386 or darwin_amd64                                                                 #
+#   - solaris_amd64                                                                              #
+# os :                                                                                           #
+#   - redhat                                                                                     #
+#   - centos                                                                                     #
+#   - ubuntu (Default)                                                                           #
+#   - solaris                                                                                    #
+#   - freebsd                                                                                    #
+#   - macosx                                                                                     #
+# Backend :                                                                                      #
+#   - consul : Use Consul as backend. (Local agent is required on Vault Server)                  #
+#   - file : Use local disk as data directory for Vault Server (Test purpose)                    # 
+# license : Enter the license number that Hashicorp provides                                     #
+##################################################################################################
 ```
 
-- Customize **tfvars** file with your own values :
-
+#### Vault Example : 
 ```
-################################################################################
-#                                                                              #
-# This file must be rename (without .example) and customize for your own need. #
-#                                                                              #
-################################################################################
-
-# Username that will be used to connect to VMs and by Ansible Playbook
-
-global_admin_username = "yourname"
-
-# SSH Keys that will be used to connect to nodes
-
-id_rsa_path = "~/.ssh/id_rsa"
-ssh_public_key = ["ssh-rsa kjdkjdkjskdfhsjd;v,,wxkvcjfdlqsjk"]
-
-# Global Variables to determine location, name and more 
-
-tf_az_location = "francecentral"
-tf_az_name     = "demo"
-tf_az_env      = "dev"
-tf_az_prefix   = "hashi"
-
-# Be careful with storage account name. Must be lower case (it's in the code) and not more than 16 characters
-
-tf_az_storage_account_name = "hashivaultsto"
-
-# Here, enter the number of instance you want to deploy
-
-tf_az_bastion_nb_instance = "1"
-tf_az_consul_nb_instance  = "3"
-tf_az_vault_nb_instance   = "2"
-
-# Package's version to install on nodes 
-
-consul_version  = "1.4.2"
-vault_version   = "1.0.2"
+vaultadmin@vault01:~$ ./vault_single_server.sh 1.1.2 false
 ```
+It will download, install and configure Vault version 1.1.2 Open Source automatically on ubuntu OS.
+
+
+### For Consul 
+
+``` 
+###########################################################################################
+# How to use this script :                                                                #
+#   ./consul_server.sh consul_version os_type os license encryption_key consul_acl_token  #
+#                                                                                         #
+# consul_version :                                                                        #
+#   - OSS : 1.4.3                                                                         #
+#   - Ent: 1.4.3+ent (Default)                                                            #
+# os_type :                                                                               #
+#   - linux_386 or linux_amd64 (Default)                                                  #
+#   - linux_arm or linux_arm64                                                            #
+#   - freebsd_386 or freebsd_amd64                                                        #
+#   - darwin_386 or darwin_amd64                                                          #
+#   - solaris_amd64                                                                       #
+# os :                                                                                    #
+#   - redhat                                                                              #
+#   - centos                                                                              #
+#   - ubuntu (Default)                                                                    #
+#   - solaris                                                                             #
+#   - freebsd                                                                             #
+#   - macosx                                                                              #
+# license : Enter the license number that Hashicorp provides                              #
+# encryption_key : The key must be 16-Bits, base64 encoded.                               #                                          
+# consul_acl_token : Like Encryption Key, must be 16-Bits, base64 encoded.                #
+###########################################################################################
+
+``` 
+
+#### Vault Example : 
+```
+vaultadmin@vault01:~$ ./consul_server.sh 1.5.1 false
+```
+It will download, install and configure Vault version 1.1.2 Open Source automatically on ubuntu OS.
 
 ## Special thanks
 

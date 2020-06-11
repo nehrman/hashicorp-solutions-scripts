@@ -30,7 +30,7 @@ set -e
 
 # Variables
 
-vault_version=${1:-'1.4.1'}
+vault_version=${1:-'1.1.0'}
 vault_enterprise=${2:-true}
 vault_path="/etc/vault.d"
 os_type=${3:-'linux_amd64'}
@@ -59,7 +59,7 @@ echo "-------------------------------------------------------------"
 
 if [ ${vault_enterprise} == true ]
 then 
-curl -o ~/vault-${vault_version}+ent.zip  https://releases.hashicorp.com/vault/${vault_version}/vault_${vault_version}+ent_${os_type}.zip #/login#https://s3-us-west-2.amazonaws.com/hc-enterprise-binaries/vault/ent/${vault_version}/vault-enterprise_${vault_version}%2Bent_${os_type}.zip
+curl -o ~/vault-${vault_version}+ent.zip  https://s3-us-west-2.amazonaws.com/hc-enterprise-binaries/vault/ent/${vault_version}/vault-enterprise_${vault_version}%2Bent_${os_type}.zip
 else 
 curl -o ~/vault-${vault_version}.zip  https://releases.hashicorp.com/vault/${vault_version}/vault_${vault_version}_${os_type}.zip
 fi
@@ -234,3 +234,12 @@ echo "----------------------------------------"
 while [ -z "$(curl -s http://${ip_address}:8200/v1/sys/health)" ]; do
   sleep 3
 done
+
+echo "# Enable ssh secret engine on ssh-ca-client-signer"
+echo "--------------------------------------------------"
+
+vault secrets enable -path=ssh-ca-client-signer/ ssh
+
+echo "# Enable ssh secret engine on ssh-ca-client-signer"
+echo "--------------------------------------------------"
+

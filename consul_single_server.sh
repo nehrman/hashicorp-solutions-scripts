@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e 
+
 ##################################################################################################
 # How to use this script :                                                                       #
 #   ./consul_single_server.sh consul_version os_type os license encryption_key consul_acl_token  #
@@ -63,8 +65,6 @@ if [ ${os} == "redhat" ]
 fi
 
 sudo rm ~/consul-${consul_version}.zip
-
-
 
 echo "# Create Consul User and Directories"
 echo "-----------------------------------------"

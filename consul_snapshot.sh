@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Variables
 
 consul_version="1.4.3"

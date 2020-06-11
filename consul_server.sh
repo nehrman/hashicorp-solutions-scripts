@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ###########################################################################################
 # How to use this script :                                                                #
 #   ./consul_server.sh consul_version os_type os license encryption_key consul_acl_token  #
